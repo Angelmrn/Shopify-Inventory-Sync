@@ -1,0 +1,52 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    //url      = env("DATABASE_URL")
+}
+
+model Product {
+    id              String @id @default(uuid())
+    shopifyId       String @unique
+    title           String
+    price           Float
+    sku             String?
+    inventoryQty    Int @default(0)
+    vendor          String?
+    status          String @default("active")
+    createAt        DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+}
+
+model WebhookLog {
+    id             String @id @default(uuid())
+    webhookId      String @unique       // X-Shopify-Webhook-Id — para idempotencia
+    topic          String
+    shop           String
+    payload        Json
+    status         WebhookStatus @default(OK)
+    recivedAt      DateTime @default(now())
+}
+
+model SyncHistory {
+    id              String @id @default(uuid())
+    type            SyncType
+    productsSynced  Int @default(0)
+    startedAt       DateTime @default(now())
+    finishedAt      DateTime?
+}
+
+enum WebhookStatus {
+    OK
+    ERROR
+    DUPLICATE
+}
+
+enum SyncType {
+    MANUAL
+    WEBHOOK
+    SCHEDULED
+}
