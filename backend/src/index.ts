@@ -3,10 +3,11 @@ import cors from "cors";
 import donenv from "dotenv";
 import webhookRoutes from "./routes/webhook.routes";
 import { WebhookRequest } from "./middleware/verifyWebhook";
+import syncRoutes from "./routes/sync.routes";
 
 donenv.config();
 const app = express();
-app.use(cors({ origin: "process.env.CLIENT_URL" }));
+app.use(cors({ origin: process.env.CLIENT_URL }));
 // Captura el rawBody solo para las rutas de webhooks
 app.use(
   "/webhooks",
@@ -19,6 +20,7 @@ app.use(
 
 app.use(express.json());
 app.use("/webhooks", webhookRoutes);
+app.use("/sync", syncRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "Shopify Inventory Sync API is running" });
 });

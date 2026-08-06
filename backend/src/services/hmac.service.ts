@@ -16,8 +16,8 @@ export function verifyShopifyHmac(
       Buffer.from(generatedHash),
       Buffer.from(hmacHeader),
     );
-  } catch {
-    // si los buffers tienen longitud distinta, timingSafeEqual lanza error
+  } catch (err) {
+    console.log("Error en timingSafeEqual:", err);
     return false;
   }
 }

@@ -11,6 +11,13 @@ export const verifyWebhook = (
   next: NextFunction,
 ) => {
   const hmacHeader = req.headers["x-shopify-hmac-sha256"] as string;
+
+  console.log("HMAC header recibido:", hmacHeader);
+  console.log("rawBody existe:", !!req.rawBody);
+  console.log(
+    "SHOPIFY_API_SECRET configurado:",
+    !!process.env.SHOPIFY_API_SECRET,
+  );
   if (!req.rawBody) {
     return res.status(400).json({ message: "Missing raw body" });
   }

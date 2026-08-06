@@ -4,9 +4,8 @@ import { title } from "node:process";
 
 export const handleProductWebhook = async (req: Request, res: Response) => {
   const topic = req.headers["x-shopify-topic"] as string;
-  const shop = req.headers["x-shopify-domain"] as string;
-  const webhookId = req.headers["x-sopify-webhook-id"] as string;
-
+  const shop = req.headers["x-shopify-shop-domain"] as string;
+  const webhookId = req.headers["x-shopify-webhook-id"] as string;
   try {
     //Idempotencia
     const existing = await prisma.webhookLog.findUnique({
