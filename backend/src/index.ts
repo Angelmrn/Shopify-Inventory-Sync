@@ -4,6 +4,7 @@ import donenv from "dotenv";
 import webhookRoutes from "./routes/webhook.routes";
 import { WebhookRequest } from "./middleware/verifyWebhook";
 import syncRoutes from "./routes/sync.routes";
+import productRoutes from "./routes/product.routes";
 
 donenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.use(
 app.use(express.json());
 app.use("/webhooks", webhookRoutes);
 app.use("/sync", syncRoutes);
+app.use("/products", productRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "Shopify Inventory Sync API is running" });
 });

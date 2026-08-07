@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
-import { title } from "node:process";
 
 export const handleProductWebhook = async (req: Request, res: Response) => {
   const topic = req.headers["x-shopify-topic"] as string;
@@ -70,4 +69,11 @@ export const handleProductWebhook = async (req: Request, res: Response) => {
       .catch(() => {});
     return res.status(500).json({ message: "Server error" });
   }
+};
+
+export const getWebhookLogs = async (req: Request, res: Response) => {
+  const logs = await prisma.webhookLog.findMany({
+    orderBy: { recivedAt: "desc" },
+  });
+  res.json(logs);
 };
