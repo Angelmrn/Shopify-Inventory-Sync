@@ -75,5 +75,5 @@ export const getWebhookLogs = async (req: Request, res: Response) => {
   const logs = await prisma.webhookLog.findMany({
     orderBy: { recivedAt: "desc" },
   });
-  res.json(logs);
+  res.json({ logs });
 };

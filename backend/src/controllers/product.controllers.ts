@@ -5,7 +5,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
   const products = await prisma.product.findMany({
     orderBy: { updatedAt: "desc" },
   });
-  res.json(products);
+  res.json({ products });
 };
 
 export const getDashboadStats = async (req: Request, res: Response) => {
