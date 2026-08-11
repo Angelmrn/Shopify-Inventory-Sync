@@ -17,7 +17,7 @@ export interface WebhookLog {
   topic: string;
   shop: string;
   status: "OK" | "ERROR" | "DUPLICATE";
-  recicedAt: string;
+  recivedAt: string;
 }
 
 export interface DashboardStats {
@@ -28,9 +28,9 @@ export interface DashboardStats {
     finishedAt: string;
     productsSynced: number;
   } | null;
-  lasWebhook: {
+  lastWebhook: {
     topic: string;
-    receivedAt: string;
+    recivedAt: string;
     status: string;
   } | null;
 }

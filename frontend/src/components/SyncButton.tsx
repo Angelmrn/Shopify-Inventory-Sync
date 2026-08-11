@@ -15,7 +15,7 @@ export default function SyncButton() {
       alert(`Sincronizados ${response.productsSynced} productos`);
       router.refresh();
     } catch (error) {
-      alert("Error in Sync");
+      alert(error);
     } finally {
       setLoading(false);
     }

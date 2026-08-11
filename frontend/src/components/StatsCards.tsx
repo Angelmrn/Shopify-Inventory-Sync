@@ -54,13 +54,13 @@ export default function StatusCards({ stats }: { stats: DashboardStats }) {
         </CardHeader>
         <CardContent>
           <p className="text-sm">
-            {stats.lasWebhook
-              ? new Date(stats.lasWebhook.receivedAt).toLocaleString("es-MX")
+            {stats.lastWebhook
+              ? new Date(stats.lastWebhook.recivedAt).toLocaleString("es-MX")
               : "Ninguno"}
           </p>
-          {stats.lasWebhook && (
+          {stats.lastWebhook && (
             <p className="text-xs text-muted-foreground">
-              {stats.lasWebhook.topic}
+              {stats.lastWebhook.topic}
             </p>
           )}
         </CardContent>
