@@ -121,6 +121,16 @@ Shopify-Inventory-Sync/
             └── index.ts
 ```
 
+### 📸 Screenshots
+
+### Dashboard
+
+![Dashboard](./docs/screenshots/InventorySync.jpg)
+
+### Sync
+
+![SyncView](./docs/screenshots/SyncView.jpg)
+
 ### ⚙️ Instalación y Configuración
 
 #### Prerequisitos
@@ -321,6 +331,16 @@ Shopify Webhooks ────────► Automatic update (push)
 | TypeScript              | Static typing            |
 | Tailwind CSS            | Utility-first styling    |
 | shadcn/ui               | UI components            |
+
+### 📸 Screenshots
+
+### Dashboard
+
+![Dashboard](./docs/screenshots/InventorySync.jpg)
+
+### Sync
+
+![SyncView](./docs/screenshots/SyncView.jpg)
 
 ### ⚙️ Installation & Setup
 

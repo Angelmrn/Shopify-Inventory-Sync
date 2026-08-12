@@ -10,23 +10,43 @@ export default async function DashboardPage() {
     getStats(),
     getWebhookLogs(),
   ]);
+
   return (
-    <div className="container mx-auto py-8 px-4 space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Shopify Inventory Sync</h1>
+    <div className="container mx-auto py-10 px-4 md:px-6 space-y-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card border rounded-2xl p-6 shadow-sm">
+        <div>
+          <h1 className="text-3xl font-extrabold tracking-tight mt-1">
+            Inventory Sync
+          </h1>
+        </div>
         <SyncButton />
       </div>
-
       <StatsCard stats={stats} />
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Productos</h2>
-        <ProductsTable products={productsRes.products} />
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Historial de webhooks</h2>
-        <WebhookHistory logs={logsRes.logs} />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-4 bg-card border rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Products Catalog
+            </h2>
+            <span className="text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">
+              {productsRes.products.length} items
+            </span>
+          </div>
+          <ProductsTable products={productsRes.products} />
+        </div>
+        <div className="space-y-4 bg-card border rounded-2xl p-6 shadow-sm flex flex-col">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Live Webhooks
+            </h2>
+            <span className="text-xs font-mono text-muted-foreground">
+              Real-time
+            </span>
+          </div>
+          <div className="flex-1 overflow-y-auto max-h-125">
+            <WebhookHistory logs={logsRes.logs} />
+          </div>
+        </div>
       </div>
     </div>
   );
