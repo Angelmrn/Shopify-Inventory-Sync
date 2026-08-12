@@ -125,11 +125,11 @@ Shopify-Inventory-Sync/
 
 ### Dashboard
 
-![Dashboard](./docs/screenshots/InventorySync.jpg)
+![Dashboard](./docs/screenshots/SyncDashboard.png)
 
 ### Sync
 
-![SyncView](./docs/screenshots/SyncView.jpg)
+![SyncView](./docs/screenshots/Sync.png)
 
 ### ⚙️ Instalación y Configuración
 
@@ -336,11 +336,11 @@ Shopify Webhooks ────────► Automatic update (push)
 
 ### Dashboard
 
-![Dashboard](./docs/screenshots/InventorySync.jpg)
+![Dashboard](./docs/screenshots/SyncDashboard.png)
 
 ### Sync
 
-![SyncView](./docs/screenshots/SyncView.jpg)
+![SyncView](./docs/screenshots/Sync.png)
 
 ### ⚙️ Installation & Setup
 
