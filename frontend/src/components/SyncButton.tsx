@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { triggerSync } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { MdSync } from "react-icons/md";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 export default function SyncButton() {
   const [loading, setLoading] = useState(false);
@@ -33,8 +35,9 @@ export default function SyncButton() {
 
   return (
     <>
-      <Button onClick={handleSync} disabled={loading}>
+      <Button onClick={handleSync} disabled={loading} className="group">
         {loading ? "Syncing..." : "Sync"}
+        <MdSync className="group-hover:animate-spin" />
       </Button>
 
       <AlertDialog
@@ -43,11 +46,17 @@ export default function SyncButton() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Syncing complete</AlertDialogTitle>
-            <AlertDialogDescription>
+            <div className="flex items-center gap-3">
+              <AlertDialogTitle className="text-xl">
+                Syncing complete
+              </AlertDialogTitle>
+              <IoMdCheckmarkCircleOutline className="w-6 h-6" />
+            </div>
+            <AlertDialogDescription className="text-left">
               Syncing {result?.productsSynced} products.
             </AlertDialogDescription>
           </AlertDialogHeader>
+
           <AlertDialogFooter>
             <AlertDialogAction onClick={() => setResult(null)}>
               Accept

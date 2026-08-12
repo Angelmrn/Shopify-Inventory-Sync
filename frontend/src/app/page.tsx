@@ -3,6 +3,7 @@ import StatsCard from "@/components/StatsCards";
 import SyncButton from "@/components/SyncButton";
 import ProductsTable from "@/components/ProductsTable";
 import WebhookHistory from "@/components/WebhookHistory";
+import { GrSync } from "react-icons/gr";
 
 export default async function DashboardPage() {
   const [productsRes, stats, logsRes] = await Promise.all([
@@ -14,10 +15,11 @@ export default async function DashboardPage() {
   return (
     <div className="container mx-auto py-10 px-4 md:px-6 space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card border rounded-2xl p-6 shadow-sm">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight mt-1">
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-extrabold tracking-tight">
             Inventory Sync
           </h1>
+          <GrSync className="w-7 h-7" />
         </div>
         <SyncButton />
       </div>
