@@ -14,7 +14,7 @@ export const handleProductWebhook = async (req: Request, res: Response) => {
     if (existing) {
       return res
         .status(200)
-        .json({ message: "Duplicate webhook. alrady processed" });
+        .json({ message: "Duplicate webhook. already processed" });
     }
 
     const productData = req.body;
@@ -62,8 +62,6 @@ export const handleProductWebhook = async (req: Request, res: Response) => {
           shop,
           payload: req.body,
           status: "ERROR",
-          errorMessage:
-            error instanceof Error ? error.message : "Unknown error",
         },
       })
       .catch(() => {});
@@ -72,8 +70,13 @@ export const handleProductWebhook = async (req: Request, res: Response) => {
 };
 
 export const getWebhookLogs = async (req: Request, res: Response) => {
-  const logs = await prisma.webhookLog.findMany({
-    orderBy: { recivedAt: "desc" },
-  });
-  res.json({ logs });
+  try {
+    const logs = await prisma.webhookLog.findMany({
+      orderBy: { receivedAt: "desc" },
+    });
+    res.json({ logs });
+  } catch (error) {
+    console.error("Error fetching webhook logs:", error);
+    return res.status(500).json({ message: "Failed to fetch webhook logs" });
+  }
 };

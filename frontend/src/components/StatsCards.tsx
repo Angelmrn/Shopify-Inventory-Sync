@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DashboardStats } from "@/types";
 
-export default function StatusCards({ stats }: { stats: DashboardStats }) {
+export default function StatsCards({ stats }: { stats: DashboardStats }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <Card>
@@ -55,7 +55,7 @@ export default function StatusCards({ stats }: { stats: DashboardStats }) {
         <CardContent>
           <p className="text-sm">
             {stats.lastWebhook
-              ? new Date(stats.lastWebhook.recivedAt).toLocaleString("es-MX")
+              ? new Date(stats.lastWebhook.receivedAt).toLocaleString("es-MX")
               : "Ninguno"}
           </p>
           {stats.lastWebhook && (

@@ -11,7 +11,7 @@ export default function WebhookHistory({ logs }: { logs: WebhookLog[] }) {
         >
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">
-              {new Date(log.recivedAt).toLocaleTimeString("es-MX")}
+              {new Date(log.receivedAt).toLocaleTimeString("es-MX")}
             </span>
             <span className="text-sm font-medium">{log.topic}</span>
           </div>

@@ -3,11 +3,11 @@ export interface Product {
   shopifyId: string;
   title: string;
   price: number;
-  sku: string;
+  sku: string | null;
   inventoryQty: number;
-  vendor: string;
+  vendor: string | null;
   status: string;
-  createAt: string;
+  createdAt: string;
   updatedAt: string;
 }
 
@@ -17,7 +17,7 @@ export interface WebhookLog {
   topic: string;
   shop: string;
   status: "OK" | "ERROR" | "DUPLICATE";
-  recivedAt: string;
+  receivedAt: string;
 }
 
 export interface DashboardStats {
@@ -30,7 +30,7 @@ export interface DashboardStats {
   } | null;
   lastWebhook: {
     topic: string;
-    recivedAt: string;
+    receivedAt: string;
     status: string;
   } | null;
 }

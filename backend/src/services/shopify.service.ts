@@ -1,5 +1,5 @@
 const SHOPIFY_STORE = process.env.SHOPIFY_STORE!;
-const SOPIFY_ADMIN_TOKEN = process.env.SHOPIFY_ADMIN_TOKEN!;
+const SHOPIFY_ADMIN_TOKEN = process.env.SHOPIFY_ADMIN_TOKEN!;
 const API_VERSION = "2026-07";
 
 interface ShopifyProductNode {
@@ -18,7 +18,7 @@ interface ShopifyProductNode {
   };
 }
 
-interface ShopifiGaphQLResponse {
+interface ShopifyGraphQLResponse {
   data: {
     products: {
       pageInfo: {
@@ -31,6 +31,7 @@ interface ShopifiGaphQLResponse {
     };
   };
 }
+
 export async function fetchAllShopifyProducts(): Promise<ShopifyProductNode[]> {
   const products: ShopifyProductNode[] = [];
   let hasNextPage = true;
@@ -71,7 +72,7 @@ export async function fetchAllShopifyProducts(): Promise<ShopifyProductNode[]> {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Shopify-Access-Token": SOPIFY_ADMIN_TOKEN,
+          "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
         },
         body: JSON.stringify({
           query,
@@ -80,9 +81,15 @@ export async function fetchAllShopifyProducts(): Promise<ShopifyProductNode[]> {
       },
     );
 
-    const data: ShopifiGaphQLResponse = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        `Shopify API error: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data: ShopifyGraphQLResponse = await response.json();
     const productsData = data.data.products;
-    products.push(...productsData.edges.map((edge: any) => edge.node));
+    products.push(...productsData.edges.map((edge) => edge.node));
     hasNextPage = productsData.pageInfo.hasNextPage;
     cursor = productsData.pageInfo.endCursor;
   }

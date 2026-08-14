@@ -1,6 +1,5 @@
 generator client {
     provider = "prisma-client-js"
-    output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -16,7 +15,7 @@ model Product {
     inventoryQty    Int @default(0)
     vendor          String?
     status          String @default("active")
-    createAt        DateTime @default(now())
+    createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
 }
 
@@ -27,7 +26,7 @@ model WebhookLog {
     shop           String
     payload        Json
     status         WebhookStatus @default(OK)
-    recivedAt      DateTime @default(now())
+    receivedAt      DateTime @default(now())
 }
 
 model SyncHistory {

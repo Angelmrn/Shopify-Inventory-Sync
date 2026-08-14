@@ -3,13 +3,13 @@ import { prisma } from "../lib/prisma";
 import { fetchAllShopifyProducts } from "../services/shopify.service";
 
 export const syncAllProducts = async (req: Request, res: Response) => {
-  const syncRecord = await prisma.syncHistory.create({
-    data: { type: "MANUAL" },
-  });
-
+  let syncRecord;
   try {
+    syncRecord = await prisma.syncHistory.create({
+      data: { type: "MANUAL" },
+    });
+
     const shopifyProducts = await fetchAllShopifyProducts();
-    //Extraemos el numero del id
     const extractId = (gid: string) => gid.split("/").pop()!;
     for (const product of shopifyProducts) {
       const variant = product.variants.edges[0].node;
@@ -48,6 +48,12 @@ export const syncAllProducts = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Sync Error:", error);
+    if (syncRecord) {
+      await prisma.syncHistory.update({
+        where: { id: syncRecord.id },
+        data: { finishedAt: new Date() },
+      }).catch(() => {});
+    }
     return res.status(500).json({ message: "Sync Failed" });
   }
 };

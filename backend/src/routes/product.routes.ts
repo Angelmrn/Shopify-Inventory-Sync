@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
   getAllProducts,
-  getDashboadStats,
+  getDashboardStats,
 } from "../controllers/product.controllers";
 
 const router = Router();
 
 router.get("/", getAllProducts);
-router.get("/stats", getDashboadStats);
+router.get("/stats", getDashboardStats);
 
 export default router;
